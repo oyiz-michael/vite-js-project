@@ -39,7 +39,7 @@ jobs:
                 npm install                
                   
             - name: test
-              run: mpm run test 
+              run: npm run test 
 
     build:
         runs-on: ubuntu-latest 
