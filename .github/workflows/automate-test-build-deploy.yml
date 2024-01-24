@@ -1,0 +1,33 @@
+name: test-build-deploy
+run-name: test build deploy
+
+on: 
+    workflow_dispatch:
+    push:
+        branches: 
+        - 'main'
+jobs: 
+    Test:
+        runs-on: ubuntu latest 
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4.1.1
+
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v4.0.1
+              with: 
+                node-version: 18
+
+            - name: install dependency and test 
+              run: |
+                npm install
+                eslint --ext .jsx --fix src"
+                vitest run
+
+            - name: build 
+              run: |
+                vite build
+                
+
+    
+        
