@@ -20,12 +20,18 @@ jobs:
             - name: install dependency and test 
               run: |
                 npm install
-                eslint --ext .jsx --fix src"
-                vitest run
+            - name: lint
+              run: npm run lint 
+                    
+            - name: test
+              run: mpm run test 
 
             - name: build 
               run: |
-                vite build
+                npm run build
+
+            - name: deploy
+              run: echo "deploying"
 
 
     
