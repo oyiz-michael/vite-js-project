@@ -64,7 +64,7 @@ jobs:
             - name: build 
               run: |
                     npm run build
-                    
+
             - name: upload artifact 
               uses: actions/upload-artifact@v4
               with:
@@ -75,6 +75,13 @@ jobs:
         runs-on: ubuntu-latest 
         needs: build
         steps:
+            - name: Download afrtifact 
+              uses: actions/download-artifact@v4
+              with:
+                name: dist-1.0.0.1
+            
+            - name: ls folder 
+              run: ls
 
             - name: deploy
               run: echo "deploying"
