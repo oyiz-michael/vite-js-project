@@ -73,6 +73,7 @@ jobs:
 
     Deploy:
         runs-on: ubuntu-latest 
+        if: failure()
         needs: build
         steps:
             - name: Download afrtifact 

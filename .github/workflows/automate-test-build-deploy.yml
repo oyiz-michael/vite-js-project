@@ -4,6 +4,9 @@ run-name: test build deploy
 on: 
     workflow_dispatch:
     push:
+        branches: 
+            main
+            master 
 
 jobs: 
     lint:
