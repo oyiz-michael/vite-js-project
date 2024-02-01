@@ -1,0 +1,70 @@
+name: reuseable deploy
+on: workflow_call
+jobs: 
+    lint:
+        runs-on: ubuntu-latest 
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4.1.1
+
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v4.0.1
+              with: 
+                node-version: 18
+
+            - name: install dependency and test 
+              run: |
+                npm install
+
+            - name: lint
+              run: npm run lint 
+    test:
+        runs-on: ubuntu-latest 
+        needs:  lint
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4.1.1
+
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v4.0.1
+              with: 
+                node-version: 18
+
+            - name: install dependency and test 
+              run: |
+                npm install                
+                    
+            - name: test
+              run: npm run test 
+
+    build:
+        runs-on: ubuntu-latest 
+        needs: test
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4.1.1
+
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v4.0.1
+              with: 
+                node-version: 18
+
+            - name: install dependency and test 
+              run: |
+               npm install              
+            
+            - name: build 
+              run: |
+                    npm run build
+
+    Deploy:
+        runs-on: ubuntu-latest 
+        needs: build
+        steps:
+
+            - name: deploy
+              run: echo "deploying"
+
+
+    
+        
